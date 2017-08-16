@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        applicationId "com.newstoday.android"
+        multiDexEnabled true
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+    }
+    signingConfigs {
+        relase {
+            keyAlias 'shenruan.keystore'
+            keyPassword 'gxb19891223'
+            storeFile file('/Users/GoviChow/Downloads/project/shenruan.keystore')
+            storePassword 'gxb19891223'
+        }
+    }
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled false
+            //移除无用的
+            shrinkResources false
+            //资源文件按4字节对齐
+            zipAlignEnabled true
+            //关闭调试
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relase
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+    compileOptions {
+        // 指定用 Java8 编译
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':common')
+    testCompile rootProject.ext.dependencies["junit"]
+    /** ButterKnife   */
+    apt rootProject.ext.dependencies["butterknife-apt"]
+    /** DialogFragment   */
+    compile rootProject.ext.dependencies["dialogfragment"]
+    /** Leakcanary   */
+    debugCompile rootProject.ext.dependencies["leakcanary-debug"]
+    releaseCompile rootProject.ext.dependencies["leakcanary-release"]
+    testCompile rootProject.ext.dependencies["leakcanary-test"]
+}

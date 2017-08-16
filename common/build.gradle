@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        // 指定用 Java8 编译
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+    }
+}
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.newstoday.android.common.http.db'
+    targetGenDir 'src/main/java'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["recyclerview-v7"]
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["cardview"]
+    testCompile rootProject.ext.dependencies["junit"]
+    /**MaterialSearchView*/
+    compile rootProject.ext.dependencies["material_searchview"]
+    /**RxAndroid*/
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["rxlifecycle"]
+    compile rootProject.ext.dependencies["rxlifecycle-components"]
+    /**RxPermission*/
+    compile rootProject.ext.dependencies["rxpermissions"]
+    /**Retrofit*/
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["retrofit-converter-gson"]
+    compile rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+    /**Picasso pic*/
+    compile rootProject.ext.dependencies["picasso"]
+    /**orm Sqlite*/
+    compile rootProject.ext.dependencies["greendao"]
+    /**DataBanding*/
+    compile rootProject.ext.dependencies["butterknife"]
+    /**Widget*/
+    compile rootProject.ext.dependencies["numberprogressbar"]
+    /**Stetho*/
+    compile rootProject.ext.dependencies["stetho"]
+    compile rootProject.ext.dependencies["stetho-okhttp3"]
+}
