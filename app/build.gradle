@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -55,22 +54,12 @@ android {
     }
 }
 
-buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    }
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':common')
     testCompile rootProject.ext.dependencies["junit"]
     /** ButterKnife   */
-    apt rootProject.ext.dependencies["butterknife-apt"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-apt"]
     /** DialogFragment   */
     compile rootProject.ext.dependencies["dialogfragment"]
     /** Leakcanary   */

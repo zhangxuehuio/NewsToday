@@ -1,12 +1,12 @@
 ext {
 
-    android = [compileSdkVersion       : 26,
-               buildToolsVersion       : "26.0.1",
+    android = [compileSdkVersion       : 25,
+               buildToolsVersion       : "25.0.2",
                minSdkVersion           : 19,
-               targetSdkVersion        : 26,
+               targetSdkVersion        : 25,
                versionCode             : 1,
                versionName             : "1.0",
-               androidSupportSdkVersion: "26.0.0-beta1",
+               androidSupportSdkVersion: "25.1.1",
                retrofitSdkVersion      : "2.1.0",
                rxlifecycleSdkVersion   : "1.0",
                butterknifeSdkVersion   : "8.4.0",
@@ -41,8 +41,6 @@ ext {
             /**DataBanding*/
             "butterknife"            : "com.jakewharton:butterknife:${android["butterknifeSdkVersion"]}",
             "butterknife-apt"        : "com.jakewharton:butterknife-compiler:${android["butterknifeSdkVersion"]}",
-            /**Widget*/
-            "numberprogressbar"      : 'com.daimajia.numberprogressbar:library:1.2',
             /**Stetho*/
             "stetho"                 : "com.facebook.stetho:stetho:${android["stethoSdkVersion"]}",
             "stetho-okhttp3"         : "com.facebook.stetho:stetho-okhttp3:${android["stethoSdkVersion"]}",
@@ -50,8 +48,7 @@ ext {
             "leakcanary-debug"       : "com.squareup.leakcanary:leakcanary-android:${android["leakcanarySdkVersion"]}",
             "leakcanary-release"     : "com.squareup.leakcanary:leakcanary-android-no-op:${android["leakcanarySdkVersion"]}",
             "leakcanary-test"        : "com.squareup.leakcanary:leakcanary-android-no-op:${android["leakcanarySdkVersion"]}",
-            /**MpaChart*/
-            "mpaChart"               : 'com.github.PhilJay:MPAndroidChart:v3.0.0'
+
     ]
 
 
